@@ -48,3 +48,10 @@ jobs:
         DOCKER_REPOSITORY: ${{ secrets.DOCKER_REPOSITORY }}
       with:
         arguments: bootBuildImage
+  deployment:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+    - name: Deploy to local minikube
+      run: 
+        kubectl apply -f src/main/resources/k8s/hello-deploy-cicd.yml
